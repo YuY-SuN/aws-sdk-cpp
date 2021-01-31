@@ -4062,7 +4062,9 @@ ComputeEndpointOutcome S3Client::ComputeEndpointString(const Aws::String& bucket
     if(m_useVirtualAddressing && Aws::Utils::IsValidDnsLabel(bucket) &&
         bucket == Aws::Utils::StringUtils::ToLower(bucket.c_str()))
     {
-        ss << bucket << "." << m_baseUri;
+        // off to cname/virtual host
+        ss << m_baseUri << "/" << bucket;
+//        ss << bucket << "." << m_baseUri;
     }
     else
     {
